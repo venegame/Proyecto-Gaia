@@ -2,155 +2,468 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../CSS/Index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/Index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
 <script src="../Scripts/contentCaller.js"></script>
-<!-- Esto simula cargado de layout en asp netcore. Cuando se migre, se meterá el nav y footer al documento, y se borra esta línea -->
+<style>
+    .carousel-item {
+        height: 44vh !important;
+    }
+
+    .carousel-item img {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+    }
+
+
+    .img-media {
+        width: 100%;
+        height: 44vh;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    @media screen and (max-width: 991.98px) {
+        .img-media {
+            height: 25vh;
+        }
+    }
+
+
+    .carousel-item img {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    @media screen and (max-width: 991.98px) {
+        .carousel-item {
+            height: 25vh !important;
+        }
+
+    }
+</style>
+<style>
+    .img-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .nombre-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        text-align: center;
+        padding: 5px;
+        font-weight: bold;
+        font-size: 1rem;
+        display: none;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+</style>
+
 
 <body>
     <div id="navbar"></div>
     <main>
-        <div class="content"> <!-- @render content en asp netcore...! -->
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet turpis ut sem scelerisque
-                varius. Aliquam erat volutpat. Aliquam at congue libero. Curabitur finibus maximus tempus. Ut non orci
-                lacus. Nulla facilisi. Etiam blandit id purus sit amet convallis. Quisque tempus risus et tempor
-                aliquet. Donec ullamcorper erat semper pretium consectetur.
+        <div class="content p-0">
 
-                Maecenas libero urna, eleifend quis erat sit amet, auctor ullamcorper sapien. Aliquam ornare sed felis
-                at pulvinar. Cras consequat diam auctor neque suscipit, in hendrerit sapien lacinia. Morbi tortor erat,
-                sagittis ac ante sed, mollis efficitur nulla. Class aptent taciti sociosqu ad litora torquent per
-                conubia nostra, per inceptos himenaeos. In eget orci id magna laoreet mattis. Class aptent taciti
-                sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed et ante a purus consequat
-                gravida eget ut nulla. Donec at massa turpis. Suspendisse fermentum elit non orci volutpat commodo.
-                Curabitur vehicula enim maximus iaculis gravida.
+            <!-- Carrusel: animales del jardín -->
+            <div id="jardinCarousel" class="carousel slide w-100" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../Images/Sapo1.jpeg" class="d-block w-100   .img-media" alt="Mamíferos" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../Images/Catarata1.png" class="d-block w-100   .img-media" alt="Aves" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../Images/mariposaCristal1 (2).jpg" class="d-block w-100   .img-media"
+                            alt="Insectos" />
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#jardinCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#jardinCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
 
-                Duis euismod, nibh quis porta dignissim, purus tellus semper arcu, quis tempus nulla turpis eu dolor.
-                Sed dignissim felis nec rutrum luctus. Nullam tempus risus viverra odio pellentesque dapibus.
-                Suspendisse sed tellus tincidunt, vestibulum eros ut, commodo purus. Sed ipsum augue, eleifend vel
-                tempor eget, dapibus a arcu. Nullam et nunc enim. Nam metus metus, finibus ac venenatis a, sollicitudin
-                nec ipsum. Aliquam eget urna ut tellus hendrerit pharetra eget ac diam. Integer quis libero imperdiet,
-                pharetra erat vel, interdum turpis. Etiam ante arcu, accumsan id consequat in, elementum faucibus
-                tortor. Nam nisl arcu, pretium at velit a, fermentum sodales magna. Nam nec augue rhoncus neque volutpat
-                viverra. Nullam quis porttitor velit.
+            <section class="container py-5">
+                <h2 class="text-center mb-4">Catálogo de especies</h2>
+                <div class="container mb-4">
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-md-2">
+                            <select id="filtroTipo" class="form-select">
+                                <option value="">Tipo</option>
+                                <option value="fauna">Fauna</option>
+                                <option value="flora">Flora</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="filtroHabitat" class="form-select">
+                                <option value="">Hábitat</option>
+                                <option value="bosque húmedo">Bosque húmedo</option>
+                                <option value="bosque seco">Bosque seco</option>
+                                <option value="selva">Selva</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="filtroClima" class="form-select">
+                                <option value="">Clima</option>
+                                <option value="tropical">Tropical</option>
+                                <option value="seco">Seco</option>
+                                <option value="húmedo">Húmedo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="filtroColor" class="form-control" type="text" placeholder="Color (ej: verde)">
+                        </div>
+                        <div class="col-md-2">
+                            <input id="filtroFloracion" class="form-control" type="text"
+                                placeholder="Floración (ej: mayo)">
+                        </div>
+                    </div>
+                </div>
 
-                Nam diam magna, iaculis ut massa auctor, mattis ultrices lectus. Proin lacinia ante mauris, a eleifend
-                urna pharetra quis. Donec auctor mi sit amet justo pretium, vitae condimentum lacus porta. In tempor,
-                arcu vel malesuada porta, nibh ipsum commodo ipsum, quis viverra massa orci quis metus. Etiam sed
-                facilisis dolor, sed lacinia sem. Integer tristique nisi sit amet nunc imperdiet blandit. Vestibulum
-                egestas in mi eu pellentesque. Integer consectetur sagittis tortor a vehicula.
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <!-- Card 1 -->
+                    <div class="col" data-tipo="fauna" data-habitat="bosque húmedo" data-clima="húmedo"
+                        data-color="marrón" data-floracion="no-aplica">
+                        <div class="card h-100">
+                            <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/83351487/original.jpeg"
+                                class="card-img-top" alt="Murciélago frutero" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Murciélago frutero</h5>
+                                <p class="card-text">Importante polinizador nocturno que habita los bosques húmedos.</p>
+                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modalEspecie">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                In pharetra aliquet efficitur. Quisque semper metus commodo quam bibendum aliquam. Nunc imperdiet sem
-                tempor arcu elementum, sed rhoncus erat accumsan. Quisque ac velit a massa ullamcorper aliquet. Cras ut
-                mi nec quam dignissim tristique vel id ex. Morbi eu purus id mauris feugiat mattis. Mauris sagittis, leo
-                quis pretium ultricies, lectus sem lobortis diam, sit amet facilisis risus sapien nec tortor. Class
-                aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet turpis ut sem scelerisque
-                varius. Aliquam erat volutpat. Aliquam at congue libero. Curabitur finibus maximus tempus. Ut non orci
-                lacus. Nulla facilisi. Etiam blandit id purus sit amet convallis. Quisque tempus risus et tempor
-                aliquet. Donec ullamcorper erat semper pretium consectetur.
+                    <!-- Card 2 -->
+                    <div class="col" data-tipo="fauna" data-habitat="bosque seco" data-clima="tropical"
+                        data-color="marrón" data-floracion="no-aplica">
+                        <div class="card h-100">
+                            <img src="https://i0.wp.com/www.costaricajourneys.com/wp-content/uploads/2012/11/Tigrillo-in-the-tropical-forest-of-Costa-Rica.jpg"
+                                class="card-img-top" alt="Tigrillo" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Tigrillo</h5>
+                                <p class="card-text">Felino ágil de hábitos nocturnos que habita los árboles del bosque.
+                                </p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                Maecenas libero urna, eleifend quis erat sit amet, auctor ullamcorper sapien. Aliquam ornare sed felis
-                at pulvinar. Cras consequat diam auctor neque suscipit, in hendrerit sapien lacinia. Morbi tortor erat,
-                sagittis ac ante sed, mollis efficitur nulla. Class aptent taciti sociosqu ad litora torquent per
-                conubia nostra, per inceptos himenaeos. In eget orci id magna laoreet mattis. Class aptent taciti
-                sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed et ante a purus consequat
-                gravida eget ut nulla. Donec at massa turpis. Suspendisse fermentum elit non orci volutpat commodo.
-                Curabitur vehicula enim maximus iaculis gravida.
+                    <!-- Card 3 -->
+                    <div class="col" data-tipo="fauna" data-habitat="bosque húmedo" data-clima="húmedo"
+                        data-color="verde" data-floracion="no-aplica">
+                        <div class="card h-100">
+                            <img src="https://costarica.org/wp-content/uploads/2017/09/Coatimundi5.jpg"
+                                class="card-img-top" alt="Pizote" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Pizote</h5>
+                                <p class="card-text">Mamífero sociable que se desplaza en grupos buscando alimento en el
+                                    suelo.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                Duis euismod, nibh quis porta dignissim, purus tellus semper arcu, quis tempus nulla turpis eu dolor.
-                Sed dignissim felis nec rutrum luctus. Nullam tempus risus viverra odio pellentesque dapibus.
-                Suspendisse sed tellus tincidunt, vestibulum eros ut, commodo purus. Sed ipsum augue, eleifend vel
-                tempor eget, dapibus a arcu. Nullam et nunc enim. Nam metus metus, finibus ac venenatis a, sollicitudin
-                nec ipsum. Aliquam eget urna ut tellus hendrerit pharetra eget ac diam. Integer quis libero imperdiet,
-                pharetra erat vel, interdum turpis. Etiam ante arcu, accumsan id consequat in, elementum faucibus
-                tortor. Nam nisl arcu, pretium at velit a, fermentum sodales magna. Nam nec augue rhoncus neque volutpat
-                viverra. Nullam quis porttitor velit.
+                    <!-- Card 4 -->
+                    <div class="col" data-tipo="fauna" data-habitat="selva tropical" data-clima="húmedo"
+                        data-color="multicolor" data-floracion="no-aplica">
+                        <div class="card h-100">
+                            <img src="https://media.istockphoto.com/id/1441426156/es/foto/perezosos-de-tres-o-tres-dedos-de-costa-rica.jpg?s=612x612&w=0&k=20&c=XzAtnhidGr2KlglXNZC_Qo2IHkVRtIml4cmeeTCfgGg="
+                                class="card-img-top" alt="Perezoso de tres dedos"
+                                style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Perezoso de tres dedos</h5>
+                                <p class="card-text">Lento y tranquilo, pasa la mayor parte del tiempo colgado de los
+                                    árboles.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                Nam diam magna, iaculis ut massa auctor, mattis ultrices lectus. Proin lacinia ante mauris, a eleifend
-                urna pharetra quis. Donec auctor mi sit amet justo pretium, vitae condimentum lacus porta. In tempor,
-                arcu vel malesuada porta, nibh ipsum commodo ipsum, quis viverra massa orci quis metus. Etiam sed
-                facilisis dolor, sed lacinia sem. Integer tristique nisi sit amet nunc imperdiet blandit. Vestibulum
-                egestas in mi eu pellentesque. Integer consectetur sagittis tortor a vehicula.
+                    <!-- Card 5 -->
+                    <div class="col" data-tipo="fauna" data-habitat="selva tropical" data-clima="húmedo"
+                        data-color="multicolor" data-floracion="no-aplica">
+                        <div class="card h-100">
+                            <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/28144544/large.jpg"
+                                class="card-img-top" alt="Momoto" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Momoto</h5>
+                                <p class="card-text">Ave colorida y emblemática, con una cola en forma de raqueta.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                In pharetra aliquet efficitur. Quisque semper metus commodo quam bibendum aliquam. Nunc imperdiet sem
-                tempor arcu elementum, sed rhoncus erat accumsan. Quisque ac velit a massa ullamcorper aliquet. Cras ut
-                mi nec quam dignissim tristique vel id ex. Morbi eu purus id mauris feugiat mattis. Mauris sagittis, leo
-                quis pretium ultricies, lectus sem lobortis diam, sit amet facilisis risus sapien nec tortor. Class
-                aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet turpis ut sem scelerisque
-                varius. Aliquam erat volutpat. Aliquam at congue libero. Curabitur finibus maximus tempus. Ut non orci
-                lacus. Nulla facilisi. Etiam blandit id purus sit amet convallis. Quisque tempus risus et tempor
-                aliquet. Donec ullamcorper erat semper pretium consectetur.
+                    <!-- Card 6 -->
+                    <div class="col" data-tipo="fauna" data-habitat="bosque lluvioso" data-clima="húmedo"
+                        data-color="gris" data-floracion="no-aplica">
+                        <div class="card h-100">
+                            <img src="https://www.natuwa.com/wp-content/uploads/2018/08/Mandy-1024x683.jpg"
+                                class="card-img-top" alt="Danta" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Danta</h5>
+                                <p class="card-text">El mamífero terrestre más grande del bosque, clave para la
+                                    dispersión de semillas.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                Maecenas libero urna, eleifend quis erat sit amet, auctor ullamcorper sapien. Aliquam ornare sed felis
-                at pulvinar. Cras consequat diam auctor neque suscipit, in hendrerit sapien lacinia. Morbi tortor erat,
-                sagittis ac ante sed, mollis efficitur nulla. Class aptent taciti sociosqu ad litora torquent per
-                conubia nostra, per inceptos himenaeos. In eget orci id magna laoreet mattis. Class aptent taciti
-                sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed et ante a purus consequat
-                gravida eget ut nulla. Donec at massa turpis. Suspendisse fermentum elit non orci volutpat commodo.
-                Curabitur vehicula enim maximus iaculis gravida.
+                    <!-- Card 7 -->
+                    <div class="col" data-tipo="fauna" data-habitat="bosque montano" data-clima="templado"
+                        data-color="morado" data-floracion="primavera">
+                        <div class="card h-100">
+                            <img src="https://static.inaturalist.org/photos/173688685/large.jpg" class="card-img-top"
+                                alt="Rana de ojos rojos" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Rana de ojos rojos</h5>
+                                <p class="card-text">Famosa por su aspecto vibrante, vive en zonas húmedas y tropicales.
+                                </p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                Duis euismod, nibh quis porta dignissim, purus tellus semper arcu, quis tempus nulla turpis eu dolor.
-                Sed dignissim felis nec rutrum luctus. Nullam tempus risus viverra odio pellentesque dapibus.
-                Suspendisse sed tellus tincidunt, vestibulum eros ut, commodo purus. Sed ipsum augue, eleifend vel
-                tempor eget, dapibus a arcu. Nullam et nunc enim. Nam metus metus, finibus ac venenatis a, sollicitudin
-                nec ipsum. Aliquam eget urna ut tellus hendrerit pharetra eget ac diam. Integer quis libero imperdiet,
-                pharetra erat vel, interdum turpis. Etiam ante arcu, accumsan id consequat in, elementum faucibus
-                tortor. Nam nisl arcu, pretium at velit a, fermentum sodales magna. Nam nec augue rhoncus neque volutpat
-                viverra. Nullam quis porttitor velit.
+                    <!-- Card 8 -->
+                    <div class="col" data-tipo="fauna" data-habitat="bosque seco" data-clima="tropical"
+                        data-color="marrón" data-floracion="no-aplica">
+                        <div class="card h-100">
+                            <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/187746639/large.jpeg"
+                                class="card-img-top" alt="Mono aullador" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Mono aullador</h5>
+                                <p class="card-text">Emite fuertes sonidos que se escuchan a kilómetros de distancia.
+                                </p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                Nam diam magna, iaculis ut massa auctor, mattis ultrices lectus. Proin lacinia ante mauris, a eleifend
-                urna pharetra quis. Donec auctor mi sit amet justo pretium, vitae condimentum lacus porta. In tempor,
-                arcu vel malesuada porta, nibh ipsum commodo ipsum, quis viverra massa orci quis metus. Etiam sed
-                facilisis dolor, sed lacinia sem. Integer tristique nisi sit amet nunc imperdiet blandit. Vestibulum
-                egestas in mi eu pellentesque. Integer consectetur sagittis tortor a vehicula.
+                    <!-- Card 9 -->
+                    <div class="col" data-tipo="fauna" data-habitat="bosque tropical" data-clima="húmedo"
+                        data-color="negro" data-floracion="no-aplica">
+                        <div class="card h-100">
+                            <img src="https://www.museocostarica.go.cr/wp-content/uploads/Investigaciones/historia-natural/tucanes/pagina-principal/galeria/5_ramphastos_sulfuratus_emb.jpg"
+                                class="card-img-top" alt="Tucán" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Tucán</h5>
+                                <p class="card-text">Ave tropical reconocida por su gran pico y plumaje colorido.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                In pharetra aliquet efficitur. Quisque semper metus commodo quam bibendum aliquam. Nunc imperdiet sem
-                tempor arcu elementum, sed rhoncus erat accumsan. Quisque ac velit a massa ullamcorper aliquet. Cras ut
-                mi nec quam dignissim tristique vel id ex. Morbi eu purus id mauris feugiat mattis. Mauris sagittis, leo
-                quis pretium ultricies, lectus sem lobortis diam, sit amet facilisis risus sapien nec tortor. Class
-                aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet turpis ut sem scelerisque
-                varius. Aliquam erat volutpat. Aliquam at congue libero. Curabitur finibus maximus tempus. Ut non orci
-                lacus. Nulla facilisi. Etiam blandit id purus sit amet convallis. Quisque tempus risus et tempor
-                aliquet. Donec ullamcorper erat semper pretium consectetur.
+                    <!-- Card 10 -->
+                    <div class="col" data-tipo="fauna" data-habitat="bosque seco" data-clima="seco" data-color="gris"
+                        data-floracion="no-aplica">
+                        <div class="card h-100">
+                            <img src="https://i0.wp.com/montesdeoro.go.cr/wp-content/uploads/2021/02/manigordo-CR3.jpg?resize=740%2C434&ssl=1"
+                                class="card-img-top" alt="Manigordo" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Manigordo</h5>
+                                <p class="card-text">Felino solitario de hábitos nocturnos, adaptado a diversos
+                                    ecosistemas.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                Maecenas libero urna, eleifend quis erat sit amet, auctor ullamcorper sapien. Aliquam ornare sed felis
-                at pulvinar. Cras consequat diam auctor neque suscipit, in hendrerit sapien lacinia. Morbi tortor erat,
-                sagittis ac ante sed, mollis efficitur nulla. Class aptent taciti sociosqu ad litora torquent per
-                conubia nostra, per inceptos himenaeos. In eget orci id magna laoreet mattis. Class aptent taciti
-                sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed et ante a purus consequat
-                gravida eget ut nulla. Donec at massa turpis. Suspendisse fermentum elit non orci volutpat commodo.
-                Curabitur vehicula enim maximus iaculis gravida.
+                    <!-- Card 11 -->
+                    <div class="col" data-tipo="flora" data-habitat="bosque húmedo" data-clima="húmedo"
+                        data-color="rojo" data-floracion="verano">
+                        <div class="card h-100">
+                            <img src="https://jbl.ucr.ac.cr/sites/default/files/styles/crop_4-3/public/multimedia/heliconias.jpg?itok=fX0XyK_T"
+                                class="card-img-top" alt="Heliconia" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Heliconia</h5>
+                                <p class="card-text">Planta de vivos colores, frecuentada por colibríes y típica del
+                                    bosque húmedo.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                Duis euismod, nibh quis porta dignissim, purus tellus semper arcu, quis tempus nulla turpis eu dolor.
-                Sed dignissim felis nec rutrum luctus. Nullam tempus risus viverra odio pellentesque dapibus.
-                Suspendisse sed tellus tincidunt, vestibulum eros ut, commodo purus. Sed ipsum augue, eleifend vel
-                tempor eget, dapibus a arcu. Nullam et nunc enim. Nam metus metus, finibus ac venenatis a, sollicitudin
-                nec ipsum. Aliquam eget urna ut tellus hendrerit pharetra eget ac diam. Integer quis libero imperdiet,
-                pharetra erat vel, interdum turpis. Etiam ante arcu, accumsan id consequat in, elementum faucibus
-                tortor. Nam nisl arcu, pretium at velit a, fermentum sodales magna. Nam nec augue rhoncus neque volutpat
-                viverra. Nullam quis porttitor velit.
+                    <!-- Card 12 -->
+                    <div class="col" data-tipo="flora" data-habitat="bosque nuboso" data-clima="húmedo"
+                        data-color="blanco" data-floracion="todo el año">
+                        <div class="card h-100">
+                            <img src="https://jbl.ucr.ac.cr/sites/default/files/styles/crop_4-3/public/multimedia/2-orchids_guarianthe_skinneri_national_flower.jpg?itok=lmeize9z"
+                                class="card-img-top" alt="Orquídea" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Orquídea</h5>
+                                <p class="card-text">Flor nacional de Costa Rica, símbolo de biodiversidad y belleza
+                                    natural.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                Nam diam magna, iaculis ut massa auctor, mattis ultrices lectus. Proin lacinia ante mauris, a eleifend
-                urna pharetra quis. Donec auctor mi sit amet justo pretium, vitae condimentum lacus porta. In tempor,
-                arcu vel malesuada porta, nibh ipsum commodo ipsum, quis viverra massa orci quis metus. Etiam sed
-                facilisis dolor, sed lacinia sem. Integer tristique nisi sit amet nunc imperdiet blandit. Vestibulum
-                egestas in mi eu pellentesque. Integer consectetur sagittis tortor a vehicula.
+                    <!-- Card 13 -->
+                    <div class="col" data-tipo="flora" data-habitat="bosque seco" data-clima="seco"
+                        data-color="amarillo" data-floracion="invierno">
+                        <div class="card h-100">
+                            <img src="https://muniorotina.go.cr/images/2020/09/07/Corteza%20amarillo.jpg"
+                                class="card-img-top" alt="Corteza amarilla" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Corteza amarilla</h5>
+                                <p class="card-text">Árbol nativo que florece con intensidad durante el inicio de la
+                                    estación seca.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
 
-                In pharetra aliquet efficitur. Quisque semper metus commodo quam bibendum aliquam. Nunc imperdiet sem
-                tempor arcu elementum, sed rhoncus erat accumsan. Quisque ac velit a massa ullamcorper aliquet. Cras ut
-                mi nec quam dignissim tristique vel id ex. Morbi eu purus id mauris feugiat mattis. Mauris sagittis, leo
-                quis pretium ultricies, lectus sem lobortis diam, sit amet facilisis risus sapien nec tortor. Class
-                aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-                
+                    <!-- Card 14 -->
+                    <div class="col" data-tipo="flora" data-habitat="bosque lluvioso" data-clima="húmedo"
+                        data-color="rosa" data-floracion="primavera">
+                        <div class="card h-100">
+                            <img src="https://www.muniliberia.go.cr/muni/img/articles/detail/119_1_guariamorada.jpg"
+                                class="card-img-top" alt="Guaria rosada" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Guaria rosada</h5>
+                                <p class="card-text">Hermosa flor rosada, pariente de la Guaria morada, adaptada a zonas
+                                    húmedas.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 15 -->
+                    <div class="col" data-tipo="flora" data-habitat="bosque húmedo" data-clima="tropical"
+                        data-color="naranja" data-floracion="otoño">
+                        <div class="card h-100">
+                            <img src="https://i.pinimg.com/736x/93/fb/c7/93fbc7122513020401d5ce2f5516e52f.jpg"
+                                class="card-img-top" alt="Flor de jengibre" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">Flor de jengibre</h5>
+                                <p class="card-text">Flor exótica de intenso color naranja, muy común en jardines y
+                                    bosques húmedos.</p>
+                                <a href="#" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="container py-5">
+                <h2 class="text-center mb-4">Galería de Imágenes</h2>
+                <div class="row g-3">
+
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="img-container">
+                            <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/83351487/large.jpeg"
+                                class="img-fluid rounded shadow-sm" data-nombre="Murciélago frutero">
+                            <div class="nombre-overlay"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="img-container">
+                            <img src="https://i0.wp.com/www.costaricajourneys.com/wp-content/uploads/2012/11/Tigrillo-in-the-tropical-forest-of-Costa-Rica.jpg"
+                                class="img-fluid rounded shadow-sm" data-nombre="Tigrillo">
+                            <div class="nombre-overlay"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="img-container">
+                            <img src="https://costarica.org/wp-content/uploads/2017/09/Coatimundi5.jpg"
+                                class="img-fluid rounded shadow-sm" data-nombre="Pizote">
+                            <div class="nombre-overlay"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="img-container">
+                            <img src="https://media.istockphoto.com/id/1441426156/es/foto/perezosos-de-tres-o-tres-dedos-de-costa-rica.jpg?s=612x612&w=0&k=20&c=XzAtnhidGr2KlglXNZC_Qo2IHkVRtIml4cmeeTCfgGg="
+                                class="img-fluid rounded shadow-sm" data-nombre="Perezoso de tres dedos">
+                            <div class="nombre-overlay"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="img-container">
+                            <img src="https://www.muniliberia.go.cr/muni/img/articles/detail/119_1_guariamorada.jpg"
+                                class="img-fluid rounded shadow-sm" data-nombre="Guaria rosada">
+                            <div class="nombre-overlay"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="img-container">
+                            <img src="https://i.pinimg.com/736x/93/fb/c7/93fbc7122513020401d5ce2f5516e52f.jpg"
+                                class="img-fluid rounded shadow-sm" data-nombre="Flor de jengibre">
+                            <div class="nombre-overlay"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+
         </div>
     </main>
     <div id="footer"></div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalEspecie" tabindex="-1" aria-labelledby="modalEspecieLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalEspecieLabel">Murciélago frutero</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/83351487/original.jpeg"
+                            class="img-fluid img-thumbnail mb-3" style="max-height: 200px; object-fit: cover;"
+                            alt="Murciélago frutero">
+                    </div>
+                    <p><strong>Tipo:</strong> Fauna</p>
+                    <p><strong>Hábitat:</strong> Bosque húmedo</p>
+                    <p><strong>Clima:</strong> Húmedo</p>
+                    <p><strong>Color:</strong> Marrón</p>
+                    <p><strong>Floración:</strong> No aplica</p>
+                    <p><strong>Descripción:</strong> Este murciélago cumple un rol clave como polinizador nocturno. Se
+                        alimenta principalmente de frutas y contribuye a la dispersión de semillas.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
+
+<script src="../Scripts/filtroEspecies.js"></script>
 
 </html>
