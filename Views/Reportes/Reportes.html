@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../CSS/Index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../Scripts/contentCaller.js"></script>
+
+<body>
+    <div id="navbar"></div>
+    <main>
+        <div class="content"
+            style="background: url('../../Images/Background.jpg') center/cover no-repeat; padding: 4rem 1rem;">
+            <div class="container"
+                style="width: 90%; background-color: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 8px; color: #000000;">
+                <div style="overflow-x: auto;">
+                    <!-- Reporte de Visitas -->
+                    <section class="mb-5 p-4 bg-white rounded shadow-sm">
+                        <h2>Reporte de Visitas</h2>
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="reporte-fecha-inicio" class="form-label">Fecha Inicio</label>
+                                <input type="date" id="reporte-fecha-inicio" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="reporte-fecha-fin" class="form-label">Fecha Fin</label>
+                                <input type="date" id="reporte-fecha-fin" class="form-control" />
+                            </div>
+                        </div>
+                        <button id="btnGenerarVisitas" class="btn btn-success mb-4">Generar Reporte</button>
+
+                        <canvas id="chartVisitasSemanal" height="150"></canvas>
+
+                        <table id="tablaVisitas" class="table table-striped mt-3" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Semana</th>
+                                    <th>Fecha Inicio</th>
+                                    <th>Fecha Fin</th>
+                                    <th>Número de Visitas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Se llena dinámicamente -->
+                            </tbody>
+                        </table>
+
+                        <button id="exportarVisitasExcel" class="btn btn-outline-primary mt-3">Exportar a Excel</button>
+                        <button id="exportarVisitasPDF" class="btn btn-outline-danger mt-3">Exportar a PDF</button>
+                    </section>
+
+                    <!-- Reporte de Especies -->
+                    <section class="mb-5 p-4 bg-white rounded shadow-sm">
+                        <h2>Reporte de Especies</h2>
+                        <div class="mb-3">
+                            <label for="filtroHabitat" class="form-label">Filtrar por Hábitat</label>
+                            <select id="filtroHabitat" class="form-select">
+                                <option value="">-- Todos --</option>
+                                <option value="Bosque">Bosque</option>
+                                <option value="Humedal">Humedal</option>
+                                <option value="Pradera">Pradera</option>
+                            </select>
+                        </div>
+                        <button id="btnGenerarEspecies" class="btn btn-success mb-3">Generar Reporte</button>
+
+                        <table id="tablaEspecies" class="table table-striped" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Nombre Científico</th>
+                                    <th>Categoría IUCN</th>
+                                    <th>Hábitat</th>
+                                    <th>Medidas Recomendadas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section class="mb-5 p-4 bg-white rounded shadow-sm">
+                        <h2>Reporte de Publicaciones del Blog</h2>
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="tipoReportePublicacion" class="form-label">Tipo de Reporte</label>
+                                <select id="tipoReportePublicacion" class="form-select">
+                                    <option value="interaccion">Interacción (comentarios, me gusta)</option>
+                                    <option value="cantidad">Cantidad publicaciones (diaria, semanal, mensual)</option>
+                                    <option value="alcanceExterno">Alcance externo (visitas desde links)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="filtroPublicacion" class="form-label">Filtrar por Publicación (ID o
+                                    título)</label>
+                                <input type="text" id="filtroPublicacion" class="form-control" placeholder="Opcional" />
+                            </div>
+                        </div>
+                        <button id="btnGenerarPublicaciones" class="btn btn-success mb-3">Generar Reporte</button>
+
+                        <table id="tablaPublicaciones" class="table table-striped" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Fecha Publicación</th>
+                                    <th>Comentarios</th>
+                                    <th>Me gusta</th>
+                                    <th>Visitas Internas</th>
+                                    <th>Visitas Externas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </section>
+
+                </div>
+    </main>
+    <div id="footer"></div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablaInventario').DataTable({
+                autoWidth: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+                }
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#tablaVisitas, #tablaEspecies, #tablaPublicaciones').DataTable({
+                responsive: true,
+                language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+                paging: true,
+                searching: false,
+                lengthChange: false,
+                info: false
+            });
+
+
+            $('#btnGenerarVisitas').on('click', function () {
+                const tbody = $('#tablaVisitas tbody');
+                tbody.empty();
+
+                const datos = [
+                    { semana: 27, inicio: '2025-07-01', fin: '2025-07-07', visitas: 120 },
+                    { semana: 28, inicio: '2025-07-08', fin: '2025-07-14', visitas: 150 },
+                    { semana: 29, inicio: '2025-07-15', fin: '2025-07-21', visitas: 135 }
+                ];
+                datos.forEach(d => {
+                    tbody.append(`<tr>
+                        <td>${d.semana}</td><td>${d.inicio}</td><td>${d.fin}</td><td>${d.visitas}</td>
+                    </tr>`);
+                });
+
+                $('#tablaVisitas').DataTable().draw();
+
+                crearGraficoVisitas(datos);
+            });
+
+            function crearGraficoVisitas(datos) {
+                const ctx = document.getElementById('chartVisitasSemanal').getContext('2d');
+                if (window.visitasChart) window.visitasChart.destroy();
+                window.visitasChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: datos.map(d => `Semana ${d.semana}`),
+                        datasets: [{
+                            label: 'Visitas',
+                            data: datos.map(d => d.visitas),
+                            backgroundColor: '#3a5a40'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+            }
+
+            $('#exportarVisitasExcel').on('click', function () {
+                const table = document.getElementById('tablaVisitas');
+                const wb = XLSX.utils.table_to_book(table, { sheet: "Visitas" });
+                XLSX.writeFile(wb, "Reporte_Visitas.xlsx");
+            });
+
+
+            $('#btnGenerarEspecies').on('click', function () {
+                alert("Funcionalidad para generar reporte de especies pendiente.");
+            });
+            $('#btnGenerarPublicaciones').on('click', function () {
+                alert("Funcionalidad para generar reporte de publicaciones pendiente.");
+            });
+        });
+    </script>
+</body>
+
+</html>

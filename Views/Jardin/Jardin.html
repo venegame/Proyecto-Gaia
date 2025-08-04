@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión del Jardín</title>
+    <link rel="stylesheet" href="../../CSS/Index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+</head>
+
+<script src="../../Scripts/contentCaller.js"></script>
+
+<body>
+    <div id="navbar"></div>
+
+    <main>
+        <div class="content">
+            <style>
+                .content {
+                    padding: 0;
+                }
+
+                header {
+                    background-color: #3a5a40;
+                    color: white;
+                    padding: 20px;
+                    text-align: center;
+                }
+
+                .grid-modulos {
+                    display: flex;
+                    gap: 20px;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    padding: 40px 20px;
+                }
+
+                section {
+                    background-color: #ffffff;
+                    border-radius: 12px;
+                    padding: 0;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                    flex: 1 1 280px;
+                    max-width: 320px;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .modulo-imagen {
+                    width: 100%;
+                    height: 40%;
+                    object-fit: cover;
+                }
+
+                .modulo-body {
+                    padding: 20px;
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                h2 {
+                    margin: 0 0 8px;
+                    color: #3a5a40;
+                }
+
+                p {
+                    margin: 0 0 12px;
+                    flex-grow: 1;
+                }
+
+                a {
+                    all: unset;
+                    text-decoration: none;
+                    color: #3a5a40;
+
+                    font-weight: bold;
+                }
+
+                @media (max-width: 768px) {
+                    .grid-modulos {
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
+                    section {
+                        width: 90%;
+                        max-width: 100%;
+                    }
+                }
+            </style>
+
+            <header>
+                <h1>Panel de Gestión del Jardín</h1>
+            </header>
+
+            <div class="grid-modulos">
+                <section>
+                    <img class="modulo-imagen" src="../../Images/orquideas.jpg" alt="Plantas Vivas" />
+                    <div class="modulo-body">
+                        <h2>Plantas Vivas</h2>
+                        <p>Registrar y dar seguimiento al estado de las plantas según estación.</p>
+                        <a href="plantas.html">Abrir módulo</a>
+                    </div>
+                </section>
+                <section>
+                    <img class="modulo-imagen" src="../../Images/gardening-tools.jpg" alt="Inventario" />
+                    <div class="modulo-body">
+                        <h2>Inventario de Insumos</h2>
+                        <p>Registrar fertilizantes, semillas y herramientas disponibles.</p>
+                        <a href="Inventario.html">Abrir módulo</a>
+                    </div>
+                </section>
+
+                <section>
+                    <img class="modulo-imagen" src="../../Images/gardenAction.jpg" alt="Tareas del Jardín" />
+                    <div class="modulo-body">
+                        <h2>Tareas del Jardín</h2>
+                        <p>Gestionar labores como riego, poda y reproducción por planta.</p>
+                        <a href="Tareas.html">Abrir módulo</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+</body>
+
+</html>

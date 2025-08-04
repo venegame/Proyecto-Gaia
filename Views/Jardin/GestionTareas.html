@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Tareas</title>
+    <link rel="stylesheet" href="../../CSS/Index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../Scripts/contentCaller.js"></script>
+
+<body>
+    <div id="navbar"></div>
+    <main>
+        <div class="content"
+            style="background: url('../../Images/Background.jpg') center/cover no-repeat; padding: 4rem 1rem;">
+            <div class="container"
+                style="max-width: 400px; background-color: rgba(47, 82, 73, 0.95); padding: 2rem; border-radius: 8px; color: #FFF;">
+
+                <div class="tab-pane fade show active" id="tareas" role="tabpanel">
+                    <h3 class="mb-3">Registrar Tarea</h3>
+                    <form method="post" asp-controller="Tareas" asp-action="Crear">
+                        <input type="text" name="NombreTarea" class="form-control mb-3" placeholder="Nombre de la tarea"
+                            required />
+
+                        <select name="Categoria" class="form-control mb-3" required>
+                            <option value="">Seleccione categoría</option>
+                            <option value="Riego">Riego</option>
+                            <option value="Poda">Poda</option>
+                            <option value="Reproducción">Reproducción</option>
+                            <option value="Fertilización">Fertilización</option>
+                        </select>
+
+                        <input type="date" name="FechaProgramada" class="form-control mb-3" required />
+
+                        <textarea name="Descripcion" class="form-control mb-3" rows="3"
+                            placeholder="Descripción de la tarea"></textarea>
+
+                        <button type="submit" class="btn w-100 fw-bold" style="background-color: #E3DE61;">Guardar
+                            Tarea</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <div id="footer"></div>
+</body>
+
+</html>
